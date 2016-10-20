@@ -8,6 +8,11 @@ public class JarEtClass {
 
 	private HashMap<URL, ArrayList<String>> jarClass = new HashMap();
 
+	public JarEtClass()
+	{
+
+	}
+
 	/**
 	 * 
 	 * @param nom
@@ -23,7 +28,8 @@ public class JarEtClass {
 	 * @param nomClass
 	 */
 	public void ajouterNomClasse(String nomJar, String nomClass) {
-		this.jarClass.get(nomJar).add(nomClass);
+        ToURL tourl = new ToURL();
+		this.jarClass.get(tourl.toURL(nomJar)).add(nomClass);
 	}
 
 	public boolean estVide(){

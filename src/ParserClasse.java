@@ -4,14 +4,13 @@ import  IAPackage.Parler;
 
 public class ParserClasse {
 
-	private static final Class INTERFACE = Parler.class.getName() ;
 	private JarEtClass jarClass;
 	private URLClassLoader chargeur;
 	private ArrayList<Parler> iaAInctancier = new ArrayList();
 
 	public ArrayList<Parler> getListe() {
         if(this.iaAInctancier.isEmpty()){
-			this.ensembleClass();
+			this.preparerIA();
 		}
 		return this.iaAInctancier;
 	}
@@ -29,9 +28,9 @@ public class ParserClasse {
 	 	boolean res = false;
         int i = 0;
 		Class[] interfaces = c.getInterfaces();
-		while(i < interfaces.length || res == false)
+		while(i < interfaces.length && res == false)
 		{
-			if(interfaces[i].getName().equals(INTERFACE))
+			if(interfaces[i].getName().contains("Parler"))
 			{
 				res = true;
 			}
@@ -41,7 +40,7 @@ public class ParserClasse {
 	}
 
 
-	public void ensembleClass(){
+	public void preparerIA(){
         for(ArrayList<String> liste : this.jarClass.getAllJarClasses()) {
 			for (String s : liste) {
 				try {

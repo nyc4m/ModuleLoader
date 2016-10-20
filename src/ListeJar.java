@@ -25,6 +25,7 @@ public class ListeJar {
 				}
 			}
 		}
+		assert !jar.isEmpty();
 	}
 
 	/**
