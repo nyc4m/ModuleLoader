@@ -1,8 +1,6 @@
 
 import IAPackage.Parler;
 
-import java.lang.reflect.Array;
-import java.net.URLClassLoader;
 import java.util.ArrayList;
 
 public class Core {
@@ -25,6 +23,7 @@ public class Core {
         for(Parler ia : this.ia)
         {
             str += ia.dire("coucou");
+            str += "\n";
         }
         return str;
     }
