@@ -10,10 +10,14 @@ public class Core {
 
     private ArrayList<Parler> ia = new ArrayList<>();
 
-    public Core(ArrayList<Parler> listeIA)
+    public Core(String dossier)
     {
-        this.ia=listeIA;
+        ListeJar listeJar = new ListeJar(dossier);
+        ParserListeJar parserListeLar = new ParserListeJar(listeJar);
+        ParserClasse parserClasse = new ParserClasse(parserListeLar.getJarClass());
+        this.ia=parserClasse.getListe();
     }
+
 
     public String discuter()
     {

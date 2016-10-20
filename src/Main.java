@@ -5,10 +5,8 @@ public class Main {
 
     public static void main(String[] args)
     {
-        ListeJar listeJar = new ListeJar("MODULE_A_CHARGER");
-        ParserListeJar parserListeLar = new ParserListeJar(listeJar);
-        ParserClasse parserClasse = new ParserClasse(parserListeLar.getJarClass());
-        Core c = new Core(parserClasse.getListe());
+
+        Core c = new Core("MODULES_A_CHARGER");
         System.out.println(c.discuter());
     }
 }
