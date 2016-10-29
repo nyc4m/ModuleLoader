@@ -8,9 +8,13 @@ public class ParserClasse {
 	private URLClassLoader chargeur;
 	private ArrayList<Parler> iaAInctancier = new ArrayList();
 
-	public ArrayList<Parler> getListe() {
-        if(this.iaAInctancier.isEmpty()){
-			this.preparerIA();
+	public ArrayList<Parler> getListe() throws Exception {
+		try {
+			if (this.iaAInctancier.isEmpty()) {
+				this.preparerIA();
+			}
+		}catch(Exception e){
+			throw new Exception(e.getMessage());
 		}
 		return this.iaAInctancier;
 	}
@@ -40,7 +44,7 @@ public class ParserClasse {
 	}
 
 
-	public void preparerIA(){
+	public void preparerIA() throws Exception {
         for(ArrayList<String> liste : this.jarClass.getAllJarClasses()) {
 			for (String s : liste) {
 				try {
@@ -58,6 +62,7 @@ public class ParserClasse {
 
 			}
 		}
+		if(this.iaAInctancier.isEmpty()) throw new Exception("[Erreur] Pas de classe valide...");
 	}
 
 }

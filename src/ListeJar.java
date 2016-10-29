@@ -12,7 +12,7 @@ public class ListeJar {
 	 * 
 	 * @param cheminDossier
 	 */
-	public ListeJar(String cheminDossier) {
+	public ListeJar(String cheminDossier) throws Exception {
         File f = new File(cheminDossier);
 		for(File i : f.listFiles())
 		{
@@ -26,6 +26,7 @@ public class ListeJar {
 			}
 		}
 		assert !jar.isEmpty();
+		if(jar.isEmpty()) throw new Exception("[ERREUR] Aucun jar...");
 	}
 
 	/**

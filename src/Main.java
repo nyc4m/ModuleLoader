@@ -6,7 +6,12 @@ public class Main {
     public static void main(String[] args)
     {
 
-        Core c = new Core("MODULES_A_CHARGER");
-        System.out.println(c.discuter());
+        Core c = null;
+        try {
+            c = new Core("MODULES_A_CHARGER");
+            System.out.println(c.discuter());
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
     }
 }
