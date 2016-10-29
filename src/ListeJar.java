@@ -9,8 +9,9 @@ public class ListeJar {
     ArrayList<JarFile> jar = new ArrayList<JarFile>();
 
 	/**
-	 * 
-	 * @param cheminDossier
+	 * Constructeur de la liste de jar
+	 * @param cheminDossier le dossier a traiter
+	 * @throws Exception Si aucun jar n'est trouve
 	 */
 	public ListeJar(String cheminDossier) throws Exception {
         File f = new File(cheminDossier);
@@ -30,13 +31,18 @@ public class ListeJar {
 	}
 
 	/**
-	 * 
-	 * @param nom
+	 * Indique si le fichier passe en parametre est un Jar
+	 * @param nom Le nom du fichier a traiter
+	 * @return Vrai si c'est un jar, faux dans le cas contraire
 	 */
 	public boolean isJar(String nom) {
         return nom.contains(".jar");
 	}
 
+	/**
+	 * Permet d'obtenir la liste des jar
+	 * @return Retourne une ArrayList de JarFile
+	 */
 	public ArrayList<JarFile> getListe() {
 		return this.jar;
 	}

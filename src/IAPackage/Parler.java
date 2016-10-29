@@ -1,6 +1,7 @@
 package IAPackage;
+
 /**
- * Created by baptiste on 16/10/16.
+ * L'interface imposee
  */
 public interface Parler {
 

@@ -3,6 +3,10 @@
  */
 public class Main {
 
+    /**
+     * C'est la classe principale...
+     * @param args
+     */
     public static void main(String[] args)
     {
 

@@ -7,6 +7,11 @@ import java.util.ArrayList;
  */
 public class Instanciateur {
 
+    /**
+     * Permet d'instancier tous les objets Class contenu dans une liste
+     * @param classes La liste de Class a traiter
+     * @return Une ArrayList d'objet Instancier
+     */
     public ArrayList<Parler> instancier(ArrayList<Class> classes)
     {
         ArrayList<Parler> ia = new ArrayList<>();
