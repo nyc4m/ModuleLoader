@@ -33,8 +33,11 @@ public class JarEtClass {
 		{
 			this.className.add(nomClass);
 		}else{
-			throw new Exception("[Averstissement] " + nomClass + " n'a pas ete " +
-					"ajoute car son nom etait similaire a une classe deja chargee");
+			if(!nomClass.contains("Parler")) //Cette classe est commune a tous les modules, c'est evident qu'elle sera la
+			{								//inutile donc de le notifier.
+				throw new Exception("[Averstissement] " + nomClass + " n'a pas ete " +
+						"ajoute car son nom etait similaire a une classe deja chargee");
+			}
 		}
 	}
 
