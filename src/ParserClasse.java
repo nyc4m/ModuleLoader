@@ -67,12 +67,11 @@ public class ParserClasse {
 
 
 	/**
-	 * Analyse toutes les classes, les charge dans le classloader, et instancie celles qui implemente l'interface imposee
+	 * Analyse toutes les classes, les charge dans le classloader, et instancie celles qui implementent l'interface imposee
 	 * @throws Exception Si aucune classe n'implemente l'interface
 	 */
 	public void preparerIA() throws Exception {
-        for(ArrayList<String> liste : this.jarClass.getAllJarClasses()) {
-			for (String s : liste) {
+			for (String s : this.jarClass.getClassNames()) {
 				try {
 					Class c = chargeur.loadClass(s);
 					if (hasInterface(c)) {
@@ -87,7 +86,6 @@ public class ParserClasse {
 				}
 
 			}
-		}
 		if(this.iaAInctancier.isEmpty()) throw new Exception("[Erreur] Pas de classe valide...");
 	}
 
