@@ -22,7 +22,7 @@ public class ListeJar {
 				try {
 					this.jar.add(new JarFile(i));
 				} catch (IOException e) {
-					e.printStackTrace();
+					System.err.println("[Erreur] " + i.getName() + " n'a pas pu etre ajoute...");
 				}
 			}
 		}
