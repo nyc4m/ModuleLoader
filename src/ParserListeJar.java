@@ -40,7 +40,11 @@ public class ParserListeJar {
 	 * @param nomClass le nom de la class
 	 */
 	public void ajouterClasse(String nomJar, String nomClass) {
-		this.jarClass.ajouterNomClasse(nomClass);
+		try {
+			this.jarClass.ajouterNomClasse(nomClass);
+		}catch(Exception e){
+			System.err.println(e.getMessage());
+		}
 	}
 
 

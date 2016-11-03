@@ -20,7 +20,7 @@ public class JarEtClass {
 	 * @param nom Le nom du jar a ajouter (il sera convertit en URL)
 	 */
 	public void ajouterNomJar(String nom) {
-        ToURL tourl = new ToURL();
+		ToURL tourl = new ToURL();
 		this.jarUrl.add(tourl.toURL(nom));
 	}
 
@@ -28,8 +28,14 @@ public class JarEtClass {
 	 * Ajoute une nouvelle classe
 	 * @param nomClass le nom de la classe a ajouter
 	 */
-	public void ajouterNomClasse(String nomClass) {
-		this.className.add(nomClass);
+	public void ajouterNomClasse(String nomClass) throws Exception {
+		if(!this.className.contains(nomClass))
+		{
+			this.className.add(nomClass);
+		}else{
+			throw new Exception("[Averstissement] " + nomClass + " n'a pas ete " +
+					"ajoute car son nom etait similaire a une classe deja chargee");
+		}
 	}
 
 
@@ -38,8 +44,8 @@ public class JarEtClass {
 	 * @return Une liste d'URL correspondant aux Jar
 	 */
 	public URL[] urlJar(){
-        URL[] tab = new URL[0];
-        tab = this.jarUrl.toArray(tab);
+		URL[] tab = new URL[0];
+		tab = this.jarUrl.toArray(tab);
 		return tab;
 	}
 
