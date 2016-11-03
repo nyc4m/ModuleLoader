@@ -22,6 +22,7 @@ public class ParserListeJar {
 	public ParserListeJar(ListeJar liste) {
 		this.lsJar = liste;
 		this.jarClass = new JarEtClass() ;
+        this.analyser();
 	}
 
 
@@ -39,26 +40,15 @@ public class ParserListeJar {
 	 * @param nomClass le nom de la class
 	 */
 	public void ajouterClasse(String nomJar, String nomClass) {
-		this.jarClass.ajouterNomClasse(nomJar, nomClass);
+		this.jarClass.ajouterNomClasse(nomClass);
 	}
 
-	/**
-	 * Indique si une analyse a deja ete faite pour la liste en cours
-	 * @return Vrai si l'analyse a ete faite, faux dans le cas contraire
-	 */
-	public boolean isAnalysed(){
-		return !this.jarClass.estVide();
-	}
 
 	/**
 	 * Renvoie la liste des jar associe a leurs classes
 	 * @return un JarEtClass
 	 */
 	public JarEtClass getJarClass() {
-		if(!isAnalysed())
-		{
-			this.analyser();
-		}
 		return this.jarClass;
 	}
 

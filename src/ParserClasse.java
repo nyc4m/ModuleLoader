@@ -67,7 +67,7 @@ public class ParserClasse {
 
 
 	/**
-	 * Analyse toutes les classes, les charge dans le classloader, et instancie celles qui implemente l'interface imposee
+	 * Analyse toutes les classes, les charge dans le classloader, et instancie celles qui implementent l'interface imposee
 	 * @throws Exception Si aucune classe n'implemente l'interface
 	 */
 	public void preparerIA() throws Exception {

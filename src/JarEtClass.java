@@ -1,15 +1,14 @@
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
 
 public class JarEtClass {
 
 	/**
 	 * Cet attribut permet de stocker les noms de classes en fonction d'un adresse de jar
 	 */
-	private HashMap<URL, ArrayList<String>> jarClass = new HashMap();
+	private ArrayList<URL> jarUrl = new ArrayList<>();
+	private ArrayList<String> className = new ArrayList<>();
 
 	public JarEtClass()
 	{
@@ -22,41 +21,33 @@ public class JarEtClass {
 	 */
 	public void ajouterNomJar(String nom) {
         ToURL tourl = new ToURL();
-		this.jarClass.put(tourl.toURL(nom), new ArrayList<String>());
+		this.jarUrl.add(tourl.toURL(nom));
 	}
 
 	/**
 	 * Ajoute une nouvelle classe
-	 * @param nomJar le nom du jar auquel il faut associer la classe
 	 * @param nomClass le nom de la classe a ajouter
 	 */
-	public void ajouterNomClasse(String nomJar, String nomClass) {
-        ToURL tourl = new ToURL();
-		this.jarClass.get(tourl.toURL(nomJar)).add(nomClass);
+	public void ajouterNomClasse(String nomClass) {
+		this.className.add(nomClass);
 	}
 
-	/**
-	 * Indique si la HashMap est vide
-	 * @return Vrai si la hashmap est vide, faux dans le cas contraire
-	 */
-	public boolean estVide(){
-		return this.jarClass.isEmpty();
-	}
 
 	/**
 	 * Permet d'obtenir une liste d'URL
 	 * @return Une liste d'URL correspondant aux Jar
 	 */
 	public URL[] urlJar(){
-		return this.jarClass.keySet().toArray(new URL[this.jarClass.size()]);
+        URL[] tab = new URL[0];
+        tab = this.jarUrl.toArray(tab);
 	}
 
 	/**
 	 * Permet d'obtenir la liste de toutes les classes repertoriee
 	 * @return Une Collection d'ArrayList contenant l'ensemble des classes
 	 */
-	public Collection<ArrayList<String>> getAllJarClasses()
+	public ArrayList<String> getClassNames()
 	{
-		return this.jarClass.values();
+		return this.className;
 	}
 }
