@@ -16,7 +16,7 @@ public class JarEtClass {
 	}
 
 	/**
-	 * Permet d'ajouter un nom de jar et d'instancier une nouvelle ArrayList (pour stocker les chemins de classe)
+	 * Permet d'ajouter un nom de jar
 	 * @param nom Le nom du jar a ajouter (il sera convertit en URL)
 	 */
 	public void ajouterNomJar(String nom) {
