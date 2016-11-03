@@ -40,6 +40,7 @@ public class JarEtClass {
 	public URL[] urlJar(){
         URL[] tab = new URL[0];
         tab = this.jarUrl.toArray(tab);
+		return tab;
 	}
 
 	/**
