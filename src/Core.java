@@ -1,12 +1,12 @@
-
-import IAPackage.Parler;
+import IAPackage.IEchange;
+import IAPackage.IIA;
 
 import java.util.ArrayList;
 
 public class Core {
 
 
-    private ArrayList<Parler> ia = new ArrayList<>();
+    private ArrayList<IIA> ia = new ArrayList<>();
 
 
     /**
@@ -26,15 +26,14 @@ public class Core {
      * Permt de s'adresser a toutes les ia
      * @return la reponse des ia
      */
-    public String discuter()
+    public ArrayList<String> notifierToutesLesIa(IEchange message)
     {
-        String str= "";
-        for(Parler ia : this.ia)
+        ArrayList<String> reponses = new ArrayList<>();
+        for(IIA ia : this.ia)
         {
-            str += ia.dire("coucou");
-            str += "\n";
+            reponses.add(ia.jouerTour(message));
         }
-        return str;
+        return reponses;
     }
 
     /**
@@ -43,9 +42,9 @@ public class Core {
      * @param message le message a adresser l'ia
      * @return la reponse de l'ia
      */
-    public String interrogerIa(int numero, String message)
+    public String interrogerIa(int numero, IEchange message)
     {
-        return this.ia.get(numero).dire(message);
+        return this.ia.get(numero).jouerTour(message);
     }
 
 }

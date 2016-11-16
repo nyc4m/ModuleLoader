@@ -1,6 +1,7 @@
+import IAPackage.IIA;
+
 import java.net.URLClassLoader;
 import java.util.ArrayList;
-import  IAPackage.Parler;
 
 /**
  * Analyse L'ensemble des classes trouvee pour les instancier grace a l'interface imposee
@@ -18,14 +19,14 @@ public class ParserClasse {
 	/**
 	 * La liste finale contenant les ia pretes a l'emploie
 	 */
-	private ArrayList<Parler> iaAInctancier = new ArrayList();
+	private ArrayList<IIA> iaAInctancier = new ArrayList();
 
 	/**
 	 * Permet d'obtenir la liste des ia
 	 * @return Une liste d'IA prete a l'emploie
 	 * @throws Exception Si une erreur est survenue lors du traitement
 	 */
-	public ArrayList<Parler> getListe() throws Exception {
+	public ArrayList<IIA> getListe() throws Exception {
 		try {
 			if (this.iaAInctancier.isEmpty()) {
 				this.preparerIA();
@@ -56,7 +57,7 @@ public class ParserClasse {
 		Class[] interfaces = c.getInterfaces();
 		while(i < interfaces.length && res == false)
 		{
-			if(interfaces[i].getName().contains("Parler"))
+			if(interfaces[i].getName().contains("IIA"))
 			{
 				res = true;
 			}
@@ -75,7 +76,7 @@ public class ParserClasse {
 				try {
 					Class c = chargeur.loadClass(s);
 					if (hasInterface(c)) {
-						this.iaAInctancier.add((Parler)c.newInstance());
+						this.iaAInctancier.add((IIA)c.newInstance());
 					}
 				} catch (ClassNotFoundException e) {
 					e.printStackTrace();

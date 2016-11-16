@@ -54,7 +54,7 @@ public class JarEtClass {
 
 	/**
 	 * Permet d'obtenir la liste de toutes les classes repertoriee
-	 * @return Une Collection d'ArrayList contenant l'ensemble des classes
+	 * @return Un ArrayList contenant l'ensemble des classes
 	 */
 	public ArrayList<String> getClassNames()
 	{
