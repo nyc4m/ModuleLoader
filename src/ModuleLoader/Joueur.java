@@ -20,7 +20,7 @@ public class Joueur
 	public Joueur(JarFile jar)
 	{
 		Enumeration<JarEntry> e = jar.entries();
-        while(isJoueurIdiot() || e.hasMoreElements())
+        while(isJoueurIdiot() && e.hasMoreElements())
 		{
 			new traiterEntree(e.nextElement().getName(), this);
 		}

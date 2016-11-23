@@ -1,5 +1,7 @@
 package ModuleLoader;
 
+import Jeu.IIA;
+
 public class traiterEntree
 {
 
@@ -55,7 +57,7 @@ public class traiterEntree
 			Class c = SingClassLoader.chargerClass(nom);
 			Class[] inter = c.getInterfaces();
 			int i = 0;
-            while(i < inter.length || fini)
+            while(i < inter.length && !fini)
 			{
 				if(a.contient(inter[i].getName(), "IIA"))
 				{
@@ -63,6 +65,7 @@ public class traiterEntree
 				}
 				i++;
 			}
+			this.joueur.ajouterCerveau(c);
 
 		} catch (ClassNotFoundException e) {
 			System.err.println("[Erreur] La classe n'a pas ete trouvee");

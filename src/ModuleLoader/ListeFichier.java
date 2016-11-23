@@ -9,7 +9,7 @@ import java.util.jar.JarFile;
 public class ListeFichier
 {
 
-	private File[] liste;
+	private JarFile[] liste;
 
 
 	/**
@@ -18,7 +18,42 @@ public class ListeFichier
 	 */
 	public ListeFichier(String chemin)
 	{
-		this.liste = new File(chemin).listFiles();
+		//Permet d'avancer dans le tableau
+		int avancement = 0;
+        File repertoire = new File(chemin);
+        File[] fichiers = repertoire.listFiles();
+		liste = new JarFile[nbJar(fichiers)];
+		Analyseur analyseur = new Analyseur();
+        for(File f : fichiers)
+		{
+			if(analyseur.contient(f.getName(), ".jar"))
+			{
+				try {
+					liste[avancement] = new JarFile(f);
+                    avancement++;
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	/**
+	 * Retourne le nombre de jar contenu dans un tableau de fichier
+	 * @return un nombre de jar
+	 */
+	public int nbJar(File[] tab)
+	{
+		Analyseur a = new Analyseur();
+		int nb = 0;
+		for(File f : tab)
+		{
+			if(a.contient(f.getName(), ".jar"))
+			{
+				nb++;
+			}
+		}
+		return nb;
 	}
 
 	/**
@@ -26,21 +61,7 @@ public class ListeFichier
 	 */
 	public JarFile[] getJarFile()
 	{
-        Analyseur a = new Analyseur();
-		JarFile[] listeJar = new JarFile[this.liste.length];
-		for(int i = 0; i < this.liste.length; i++)
-		{
-			try {
-				if(a.contient(liste[i].getName(), ".jar"))
-				{
-					listeJar[i] = new JarFile(liste[i]);
-				}
-			} catch (IOException e) {
-				System.err.println("[Erreur] Le Jar n'est pas valide");
-			}
-		}
-
-		return listeJar;
+		return this.liste;
 	}
 
 	/**
@@ -52,7 +73,7 @@ public class ListeFichier
 		for(int i = 0; i < liste.length; i++)
 		{
 			try {
-				tab[i] = new URL("file:" + liste[i].getAbsolutePath());
+				tab[i] = new URL("file:" + liste[i].getName());
 			} catch (MalformedURLException e) {
 				e.printStackTrace();
 			}
