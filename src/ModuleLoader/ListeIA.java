@@ -1,12 +1,15 @@
 package ModuleLoader;
 
 import Jeu.*;
+
+import java.net.URL;
 import java.util.*;
+import java.util.jar.JarFile;
 
 public class ListeIA implements ICommuniquer
 {
 
-	private ArrayList<Joueur> ia;
+	private ArrayList<Joueur> ia = new ArrayList<>();
 
 	/**
 	 * constructeur de la liste D'IA. Les IA sont cherchees a l'endroit indique en parametre
@@ -14,18 +17,23 @@ public class ListeIA implements ICommuniquer
 	 */
 	public ListeIA(String chemin)
 	{
-		// TODO - implement ListeIA.ListeIA
-		throw new UnsupportedOperationException();
+        ListeFichier l = new ListeFichier(chemin);
+        JarFile[] tab = l.getJarFile();
+        chargerDansClassLoader(l.toURLTab());
+		construireJoueur(tab);
 	}
 
 	/**
-	 * Construit la liste des Joueur
+	 * Construit la liste des Joueurs
 	 * @param jar Le tableau de Jar contenant les IA
 	 */
 	public void construireJoueur(JarFile[] jar)
 	{
-		// TODO - implement ListeIA.construireJoueur
-		throw new UnsupportedOperationException();
+		for(JarFile j : jar)
+		{
+            Joueur joueur = new Joueur(j);
+			ia.add(joueur);
+		}
 	}
 
 	/**
@@ -34,18 +42,16 @@ public class ListeIA implements ICommuniquer
 	 */
 	public void chargerDansClassLoader(URL[] url)
 	{
-		// TODO - implement ListeIA.chargerDansClassLoader
-		throw new UnsupportedOperationException();
+        SingClassLoader.ajouterURL(url);
 	}
 
 	/**
 	 * 
 	 * @param message
 	 */
-	public String jouerTour(IEchange message)
+	public String jouerTour(int numJoueur, IEchange message)
 	{
-		// TODO - implement ListeIA.jouerTour
-		throw new UnsupportedOperationException();
+        return ia.get(numJoueur).reagir(message);
 	}
 
 }

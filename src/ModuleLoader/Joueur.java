@@ -1,11 +1,17 @@
 package ModuleLoader;
 
+import Jeu.IEchange;
+import Jeu.IIA;
+
+import java.util.Collection;
+import java.util.Enumeration;
+import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 public class Joueur
 {
 
-	private Class cerveau;
+	private IIA cerveau = null;
 
 	/**
 	 * Le constructeur du joueur. Le joueur s'initialise lui meme grace a un Jar contenant les classes de son IA
@@ -13,8 +19,11 @@ public class Joueur
 	 */
 	public Joueur(JarFile jar)
 	{
-		// TODO - implement Joueur.Joueur
-		throw new UnsupportedOperationException();
+		Enumeration<JarEntry> e = jar.entries();
+        while(isJoueurIdiot() || e.hasMoreElements())
+		{
+			new traiterEntree(e.nextElement().getName(), this);
+		}
 	}
 
 	/**
@@ -23,8 +32,13 @@ public class Joueur
 	 */
 	public void ajouterCerveau(Class cerveau)
 	{
-		// TODO - implement Joueur.ajouterCerveau
-		throw new UnsupportedOperationException();
+		try {
+			this.cerveau = (IIA)cerveau.newInstance();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -32,8 +46,12 @@ public class Joueur
 	 */
 	public boolean isJoueurIdiot()
 	{
-		// TODO - implement Joueur.isJoueurIdiot
-		throw new UnsupportedOperationException();
+        return this.cerveau == null? true: false;
+	}
+
+	public String reagir(IEchange message)
+	{
+		return this.cerveau.jouerTour(message);
 	}
 
 }

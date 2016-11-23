@@ -12,6 +12,4 @@ public interface IEchange
 	 */
 	String[] getTabCarte();
 
-	String[] getTab();
-
 }

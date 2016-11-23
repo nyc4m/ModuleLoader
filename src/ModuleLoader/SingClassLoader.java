@@ -1,16 +1,19 @@
 package ModuleLoader;
 
+import java.net.URL;
+import java.net.URLClassLoader;
+
 public class SingClassLoader
 {
 
 	/**
 	 * l'instance du singleton
 	 */
-	private static SingClassLoader instance;
+	private static SingClassLoader instance = new SingClassLoader();
 	/**
 	 * Le classloader charge de contenir les classes des IA charge par le programme. C'est un URLClassLoader ce qui permet de charger des Jar grace a leur URL
 	 */
-	private static URLClassLoader chargeur = ModuleLoader.SingClassLoader.SingClassLoader();
+	private static URLClassLoader chargeur;
 
 	/**
 	 * Ajoute les URL vers les jar contenant les IA
@@ -18,8 +21,7 @@ public class SingClassLoader
 	 */
 	public static void ajouterURL(URL[] url)
 	{
-		// TODO - implement SingClassLoader.ajouterURL
-		throw new UnsupportedOperationException();
+        chargeur = new URLClassLoader(url);
 	}
 
 	/**
@@ -28,7 +30,7 @@ public class SingClassLoader
 	 */
 	public static SingClassLoader getInstance()
 	{
-		return this.instance;
+		return instance;
 	}
 
 	/**
@@ -36,10 +38,8 @@ public class SingClassLoader
 	 * @param name Le nom de la classe a charger
 	 * @return La classe demandee en parametre
 	 */
-	public static Class chargerClass(String name)
-	{
-		// TODO - implement SingClassLoader.chargerClass
-		throw new UnsupportedOperationException();
+	public static Class chargerClass(String name) throws ClassNotFoundException {
+        return chargeur.loadClass(name);
 	}
 
 	/**
@@ -47,8 +47,6 @@ public class SingClassLoader
 	 */
 	private SingClassLoader()
 	{
-		// TODO - implement SingClassLoader.SingClassLoader
-		throw new UnsupportedOperationException();
 	}
 
 }

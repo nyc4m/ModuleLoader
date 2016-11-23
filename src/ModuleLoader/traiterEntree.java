@@ -11,8 +11,7 @@ public class traiterEntree
 	 */
 	public String toClassName(String nom)
 	{
-		// TODO - implement traiterEntree.toClassName
-		throw new UnsupportedOperationException();
+		return nom.substring(0, nom.length() - ".class".length());
 	}
 
 	/**
@@ -21,8 +20,7 @@ public class traiterEntree
 	 */
 	public boolean isClass(String nom)
 	{
-		// TODO - implement traiterEntree.isClass
-		throw new UnsupportedOperationException();
+        return new Analyseur().contient(nom, ".class");
 	}
 
 	/**
@@ -31,8 +29,7 @@ public class traiterEntree
 	 */
 	public boolean isInsidePackage(String nom)
 	{
-		// TODO - implement traiterEntree.isInsidePackage
-		throw new UnsupportedOperationException();
+        return new Analyseur().contient(nom, "/");
 	}
 
 	/**
@@ -42,8 +39,7 @@ public class traiterEntree
 	 */
 	public String slashToDot(String nom)
 	{
-		// TODO - implement traiterEntree.slashToDot
-		throw new UnsupportedOperationException();
+        return nom.replace("/", ".");
 	}
 
 	/**
@@ -51,20 +47,39 @@ public class traiterEntree
 	 * @param nom La classe a tester
 	 * @return Vrai si la classe ets le cerveau, faux sinon
 	 */
-	public boolean isCerveau(String nom)
+	public void traitementCerveau(String nom)
 	{
-		// TODO - implement traiterEntree.isCerveau
-		throw new UnsupportedOperationException();
+		boolean fini = false;
+		try {
+			IAnalyseur a = new Analyseur();
+			Class c = SingClassLoader.chargerClass(nom);
+			Class[] inter = c.getInterfaces();
+			int i = 0;
+            while(i < inter.length || fini)
+			{
+				if(a.contient(inter[i].getName(), "IIA"))
+				{
+					fini = true;
+				}
+				i++;
+			}
+
+		} catch (ClassNotFoundException e) {
+			System.err.println("[Erreur] La classe n'a pas ete trouvee");
+		}
 	}
 
 	/**
 	 * Constructeur de la classe
 	 * @param nom
 	 */
-	public traiterEntree(String nom)
+	public traiterEntree(String nom, Joueur joueur)
 	{
-		// TODO - implement traiterEntree.traiterEntree
-		throw new UnsupportedOperationException();
+		this.joueur = joueur;
+        if(isClass(nom))
+		{
+			traitementClass(nom);
+		}
 	}
 
 	/**
@@ -73,8 +88,12 @@ public class traiterEntree
 	 */
 	public void traitementClass(String nom)
 	{
-		// TODO - implement traiterEntree.traitementClass
-		throw new UnsupportedOperationException();
+        if(isInsidePackage(nom))
+		{
+			nom = slashToDot(nom);
+		}
+		nom  = toClassName(nom);
+        traitementCerveau(nom);
 	}
 
 }

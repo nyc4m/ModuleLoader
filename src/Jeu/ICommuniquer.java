@@ -7,6 +7,6 @@ public interface ICommuniquer
 	 * 
 	 * @param message
 	 */
-	String jouerTour(IEchange message);
+	String jouerTour(int numJoueur, IEchange message);
 
 }
