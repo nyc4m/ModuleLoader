@@ -4,6 +4,7 @@ import Jeu.*;
 
 import java.net.URL;
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.jar.JarFile;
 
 public class ListeIA implements ICommuniquer
@@ -17,10 +18,11 @@ public class ListeIA implements ICommuniquer
 	 */
 	public ListeIA(String chemin)
 	{
-        ListeFichier l = new ListeFichier(chemin);
-        JarFile[] tab = l.getJarFile();
-        chargerDansClassLoader(l.toURLTab());
+		ListeFichier l = new ListeFichier(chemin);
+		JarFile[] tab = l.getJarFile();
+		chargerDansClassLoader(l.toURLTab());
 		construireJoueur(tab);
+		enleverJoueurIdiot();
 	}
 
 	/**
@@ -31,9 +33,13 @@ public class ListeIA implements ICommuniquer
 	{
 		for(JarFile j : jar)
 		{
-            Joueur joueur = new Joueur(j);
+			Joueur joueur = new Joueur(j);
 			ia.add(joueur);
 		}
+	}
+
+	public void enleverJoueurIdiot(){
+        ia.removeIf(joueur -> joueur.isJoueurIdiot());
 	}
 
 	/**
@@ -42,16 +48,16 @@ public class ListeIA implements ICommuniquer
 	 */
 	public void chargerDansClassLoader(URL[] url)
 	{
-        SingClassLoader.ajouterURL(url);
+		SingClassLoader.ajouterURL(url);
 	}
 
 	/**
-	 * 
+	 *
 	 * @param message
 	 */
 	public String jouerTour(int numJoueur, IEchange message)
 	{
-        return ia.get(numJoueur).reagir(message);
+		return ia.get(numJoueur).reagir(message);
 	}
 
 }

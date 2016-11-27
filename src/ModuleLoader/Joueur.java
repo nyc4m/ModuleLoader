@@ -3,7 +3,6 @@ package ModuleLoader;
 import Jeu.IEchange;
 import Jeu.IIA;
 
-import java.util.Collection;
 import java.util.Enumeration;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
