@@ -11,6 +11,7 @@ public class Joueur
 {
 
 	private IIA cerveau = null;
+	private String nom;
 
 	/**
 	 * Le constructeur du joueur. Le joueur s'initialise lui meme grace a un Jar contenant les classes de son IA
@@ -18,6 +19,7 @@ public class Joueur
 	 */
 	public Joueur(JarFile jar)
 	{
+		nom = jar.getName();
 		Enumeration<JarEntry> e = jar.entries();
         while(isJoueurIdiot() && e.hasMoreElements())
 		{
@@ -53,4 +55,8 @@ public class Joueur
 		return this.cerveau.jouerTour(message);
 	}
 
+	public String nomJoueur()
+	{
+		return this.nom;
+	}
 }

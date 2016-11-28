@@ -1,5 +1,7 @@
 package Jeu;
 
+import java.util.Iterator;
+
 public interface ICommuniquer
 {
 

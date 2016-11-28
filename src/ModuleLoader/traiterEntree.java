@@ -22,7 +22,7 @@ public class traiterEntree
 	 */
 	public boolean isClass(String nom)
 	{
-        return new Analyseur().contient(nom, ".class");
+		return new Analyseur().contient(nom, ".class");
 	}
 
 	/**
@@ -31,7 +31,7 @@ public class traiterEntree
 	 */
 	public boolean isInsidePackage(String nom)
 	{
-        return new Analyseur().contient(nom, "/");
+		return new Analyseur().contient(nom, "/");
 	}
 
 	/**
@@ -41,32 +41,31 @@ public class traiterEntree
 	 */
 	public String slashToDot(String nom)
 	{
-        return nom.replace("/", ".");
+		return nom.replace("/", ".");
 	}
 
 	/**
 	 * Teste un nom de classe et determine si elle implemente la l'interface permettant de dialoguer avec le jeu.
 	 * @param nom La classe a tester
 	 * @return Vrai si la classe ets le cerveau, faux sinon
+	 * @exception Exception la classe n'implemente pas l'interface IIA
 	 */
-	public void traitementCerveau(String nom)
-	{
+	public void traitementCerveau(String nom) {
 		boolean fini = false;
 		try {
 			IAnalyseur a = new Analyseur();
 			Class c = SingClassLoader.chargerClass(nom);
 			Class[] inter = c.getInterfaces();
 			int i = 0;
-            while(i < inter.length && !fini)
+			while(i < inter.length && !fini)
 			{
 				if(a.contient(inter[i].getName(), "IIA"))
 				{
 					fini = true;
+					this.joueur.ajouterCerveau(c);
 				}
 				i++;
 			}
-			this.joueur.ajouterCerveau(c);
-
 		} catch (ClassNotFoundException e) {
 			System.err.println("[Erreur] La classe n'a pas ete trouvee");
 		}
@@ -79,7 +78,7 @@ public class traiterEntree
 	public traiterEntree(String nom, Joueur joueur)
 	{
 		this.joueur = joueur;
-        if(isClass(nom))
+		if(isClass(nom))
 		{
 			traitementClass(nom);
 		}
@@ -91,12 +90,12 @@ public class traiterEntree
 	 */
 	public void traitementClass(String nom)
 	{
-        if(isInsidePackage(nom))
+		if(isInsidePackage(nom))
 		{
 			nom = slashToDot(nom);
 		}
 		nom  = toClassName(nom);
-        traitementCerveau(nom);
+		traitementCerveau(nom);
 	}
 
 }

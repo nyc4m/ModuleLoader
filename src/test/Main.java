@@ -1,6 +1,7 @@
 package test;
 
 import Jeu.ICommuniquer;
+import Jeu.IIA;
 import Jeu.Message;
 import ModuleLoader.ListeIA;
 
@@ -13,5 +14,6 @@ public class Main {
     {
         ICommuniquer liste = new ListeIA("MODULES_A_CHARGER/");
         System.out.println(liste.jouerTour(0, new Message()));
+        System.out.println(liste.jouerTour(1, new Message()));
     }
 }

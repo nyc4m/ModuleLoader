@@ -57,7 +57,17 @@ public class ListeIA implements ICommuniquer
 	 */
 	public String jouerTour(int numJoueur, IEchange message)
 	{
-		return ia.get(numJoueur).reagir(message);
+		String str = "";
+        if(!ia.isEmpty())
+		{
+			str += ia.get(numJoueur).reagir(message);
+		}
+		return str;
+	}
+
+	public int taille()
+	{
+		return this.ia.size();
 	}
 
 }
