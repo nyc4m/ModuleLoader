@@ -19,9 +19,9 @@ public class ListeIA implements ICommuniquer
 	public ListeIA(String chemin)
 	{
 		ListeFichier l = new ListeFichier(chemin);
-		JarFile[] tab = l.getJarFile();
+		List<JarFile> listeJar = l.getJarFile();
 		chargerDansClassLoader(l.toURLTab());
-		construireJoueur(tab);
+		construireJoueur(listeJar);
 		enleverJoueurIdiot();
 	}
 
@@ -29,7 +29,7 @@ public class ListeIA implements ICommuniquer
 	 * Construit la liste des Joueurs
 	 * @param jar Le tableau de Jar contenant les IA
 	 */
-	public void construireJoueur(JarFile[] jar)
+	public void construireJoueur(List<JarFile> jar)
 	{
 		for(JarFile j : jar)
 		{
