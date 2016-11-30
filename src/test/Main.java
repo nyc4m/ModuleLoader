@@ -12,7 +12,12 @@ public class Main {
 
     public static void main(String args[])
     {
-        IServer liste = new ListeIA("MODULES_A_CHARGER/");
+        IServer liste = null;
+        try {
+            liste = new ListeIA("MODULES_A_CHARGER/");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         for(Joueur j : liste.listeIA())
         {
             System.out.println(j.nomJoueur() + " dit :");

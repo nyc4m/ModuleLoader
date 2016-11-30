@@ -14,10 +14,10 @@ public class ListeIA implements IServer
 	 * constructeur de la liste D'IA. Les IA sont cherchees a l'endroit indique en parametre
 	 * @param chemin Le chemin ou le programme doit aller chercher les IA
 	 */
-	public ListeIA(String chemin)
-	{
+	public ListeIA(String chemin) throws Exception {
 		ListeFichier l = new ListeFichier(chemin);
 		List<JarFile> listeJar = l.getJarFile();
+        if (listeJar.isEmpty()) throw new Exception("[Erreur] aucun jar trouve");
 		chargerDansClassLoader(l.toURLTab());
 		construireJoueur(listeJar);
 		enleverJoueurIdiot();
