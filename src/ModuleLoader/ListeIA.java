@@ -1,16 +1,14 @@
 package ModuleLoader;
 
 import Jeu.*;
-
 import java.net.URL;
 import java.util.*;
-import java.util.function.Predicate;
 import java.util.jar.JarFile;
 
-public class ListeIA implements ICommuniquer
+public class ListeIA implements IServer
 {
 
-	private ArrayList<Joueur> ia = new ArrayList<>();
+	private List<Joueur> ia = new ArrayList<>();
 
 	/**
 	 * constructeur de la liste D'IA. Les IA sont cherchees a l'endroit indique en parametre
@@ -65,9 +63,13 @@ public class ListeIA implements ICommuniquer
 		return str;
 	}
 
-	public int taille()
-	{
-		return this.ia.size();
+	@Override
+	public List<Joueur> listeIA() {
+        return this.ia;
 	}
 
+	@Override
+	public Joueur obtenirIA(int i) {
+        return ia.get(i);
+	}
 }
