@@ -1,16 +1,14 @@
 package ModuleLoader;
 
 import Jeu.*;
-
 import java.net.URL;
 import java.util.*;
-import java.util.function.Predicate;
 import java.util.jar.JarFile;
 
-public class ListeIA implements ICommuniquer
+public class ListeIA implements IServer
 {
 
-	private ArrayList<Joueur> ia = new ArrayList<>();
+	private List<Joueur> ia = new ArrayList<>();
 
 	/**
 	 * constructeur de la liste D'IA. Les IA sont cherchees a l'endroit indique en parametre
@@ -19,9 +17,9 @@ public class ListeIA implements ICommuniquer
 	public ListeIA(String chemin)
 	{
 		ListeFichier l = new ListeFichier(chemin);
-		JarFile[] tab = l.getJarFile();
+		List<JarFile> listeJar = l.getJarFile();
 		chargerDansClassLoader(l.toURLTab());
-		construireJoueur(tab);
+		construireJoueur(listeJar);
 		enleverJoueurIdiot();
 	}
 
@@ -29,7 +27,7 @@ public class ListeIA implements ICommuniquer
 	 * Construit la liste des Joueurs
 	 * @param jar Le tableau de Jar contenant les IA
 	 */
-	public void construireJoueur(JarFile[] jar)
+	public void construireJoueur(List<JarFile> jar)
 	{
 		for(JarFile j : jar)
 		{
@@ -57,7 +55,21 @@ public class ListeIA implements ICommuniquer
 	 */
 	public String jouerTour(int numJoueur, IEchange message)
 	{
-		return ia.get(numJoueur).reagir(message);
+		String str = "";
+        if(!ia.isEmpty())
+		{
+			str += ia.get(numJoueur).reagir(message);
+		}
+		return str;
 	}
 
+	@Override
+	public List<Joueur> listeIA() {
+        return this.ia;
+	}
+
+	@Override
+	public Joueur obtenirIA(int i) {
+        return ia.get(i);
+	}
 }

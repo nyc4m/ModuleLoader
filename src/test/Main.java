@@ -1,7 +1,8 @@
 package test;
 
-import Jeu.ICommuniquer;
+import Jeu.IServer;
 import Jeu.Message;
+import ModuleLoader.Joueur;
 import ModuleLoader.ListeIA;
 
 /**
@@ -11,7 +12,11 @@ public class Main {
 
     public static void main(String args[])
     {
-        ICommuniquer liste = new ListeIA("MODULES_A_CHARGER/");
-        System.out.println(liste.jouerTour(0, new Message()));
+        IServer liste = new ListeIA("MODULES_A_CHARGER/");
+        for(Joueur j : liste.listeIA())
+        {
+            System.out.println(j.nomJoueur() + " dit :");
+            System.out.println("\t"+j.reagir(new Message()));
+        }
     }
 }

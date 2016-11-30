@@ -4,12 +4,16 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.jar.JarFile;
+import java.util.zip.ZipException;
 
 public class ListeFichier
 {
 
-	private JarFile[] liste;
+	private List<JarFile> liste = new ArrayList<>();
 
 
 	/**
@@ -19,24 +23,25 @@ public class ListeFichier
 	public ListeFichier(String chemin)
 	{
 		//Permet d'avancer dans le tableau
-		int avancement = 0;
-        File repertoire = new File(chemin);
-        File[] fichiers = repertoire.listFiles();
-		liste = new JarFile[nbJar(fichiers)];
+		File repertoire = new File(chemin);
+		File[] fichiers = repertoire.listFiles();
 		Analyseur analyseur = new Analyseur();
-        for(File f : fichiers)
+		for(File f : fichiers)
 		{
 			if(analyseur.contient(f.getName(), ".jar"))
 			{
 				try {
-					liste[avancement] = new JarFile(f);
-                    avancement++;
+					liste.add(new JarFile(f));
+				} catch(ZipException zip)
+				{
+					System.err.println("[Attention] "+f.getName()+" est un jar vide");
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
 		}
 	}
+
 
 	/**
 	 * Retourne le nombre de jar contenu dans un tableau de fichier
@@ -59,7 +64,7 @@ public class ListeFichier
 	/**
 	 * Renvoie une liste de Jar en fonction d'un tableau de fichiers
 	 */
-	public JarFile[] getJarFile()
+	public List<JarFile> getJarFile()
 	{
 		return this.liste;
 	}
@@ -69,11 +74,11 @@ public class ListeFichier
 	 */
 	public URL[] toURLTab()
 	{
-		URL[] tab = new URL[liste.length];
-		for(int i = 0; i < liste.length; i++)
+		URL[] tab = new URL[liste.size()];
+		for(int i = 0; i < liste.size(); i++)
 		{
 			try {
-				tab[i] = new URL("file:" + liste[i].getName());
+				tab[i] = new URL("file:" + liste.get(i).getName());
 			} catch (MalformedURLException e) {
 				e.printStackTrace();
 			}
